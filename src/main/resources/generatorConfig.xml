@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--导入属性配置-->
+    <properties resource="settings.properties"></properties>
+
+    <classPathEntry location="${db.driverLocation}"/>
+
+    <context id="default" targetRuntime="Mybatis3">
+        <!--optional,旨在创建class时，对注释进行控制 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <!-- jdbc的数据库连接 -->
+        <jdbcConnection driverClass="${db.driverClassName}"
+                        connectionURL="${db.url}"
+                        userId="${db.username}"
+                        password="${db.password}">
+        </jdbcConnection>
+
+        <!-- 非必须，类型处理器，在数据库类型和java类型之间进行的转换控制-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- Model模型生成器，用来生成含有主键key的类，记录名，以及查询Example类
+            targetPackage     指定生成的model生成所在的包名
+            targetProject     指定在该项目下所爱在的路径
+        -->
+        <javaModelGenerator targetPackage="com.yunduan.model" targetProject="./src/main/java">
+            <property name="enableSubPackage" value="false"/>
+            <property name="constructorBased" value="true"/>
+            <property name="trimStrings" value="true"/>
+            <!-- 建立的Model对象是否 不可改变  即生成的Model对象不会有 setter方法，值有构造方法 -->
+            <property name="immutable" value="false"/>
+        </javaModelGenerator>
+        
+        <sqlMapGenerator targetPackage="com.yunduan.mapper" targetProject="./src/main/java">
+            <property name="enableSubPackage" value="true"/>
+        </sqlMapGenerator>
+        
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.yunduan.dao" targetProject="./src/main/java">
+            <property name="enableSubPackage" value="true"/>
+        </javaClientGenerator>
+        
+        <!-- 要生成的那些表 -->
+        <table tableName="sys_user" domainObjectName="SysUser" enableCountByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+        <table tableName="sys_dept" domainObjectName="SysDept" enableCountByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+        <table tableName="sys_acl" domainObjectName="SysAcl" enableCountByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+        <table tableName="sys_acl_module" domainObjectName="SysAclModule" enableCountByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+        <table tableName="sys_role" domainObjectName="SysRole" enableCountByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+        <table tableName="sys_role_user" domainObjectName="SysRoleUser" enableCountByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+        <table tableName="sys_log" domainObjectName="SysLog" enableCountByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+    </context>
+</generatorConfiguration>
